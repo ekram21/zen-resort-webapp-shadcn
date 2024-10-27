@@ -7,6 +7,8 @@ import ThemeSwitch from '@/components/theme-switch'
 import { UserNav } from '@/components/user-nav'
 import { TopNav } from '@/components/top-nav'
 
+import zenLogo from "@/assets/images/common/zenLogoDarkMode.png"
+
 const topNav = [
     {
       title: 'Home',
@@ -46,7 +48,7 @@ export default function LandingPage() {
                     <h2 className='text-lg font-bold md:text-xl'>The future of hotel-guest management services</h2>
                 </div>
 
-
+                <img src={zenLogo} alt='zen-logo' className='w-1/2 h-1/2' />
 
             </div>
 
