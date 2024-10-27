@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
-    "deploy:live": "firebase deploy --only hosting"
+    "deploy:live": "tsc && vite build && firebase deploy --only hosting"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
