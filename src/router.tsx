@@ -13,6 +13,12 @@ const router = createBrowserRouter([
     }),
   },
   {
+    path: '/zen-business-admins',
+    lazy: async () => ({
+      Component: (await import('./pages/zen-business-admins')).default,
+    }),
+  },
+  {
     path: '/sign-in',
     lazy: async () => ({
       Component: (await import('./pages/auth/sign-in')).default,
