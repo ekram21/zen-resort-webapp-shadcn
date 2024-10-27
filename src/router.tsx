@@ -145,14 +145,14 @@ const router = createBrowserRouter([
     ],
   },
 
-  // Error routes
-  { path: '/500', Component: GeneralError },
-  { path: '/404', Component: NotFoundError },
-  { path: '/503', Component: MaintenanceError },
-  { path: '/401', Component: UnauthorisedError },
+    // Error routes
+    { path: '/500', Component: GeneralError },
+    { path: '/404', Component: NotFoundError },
+    { path: '/503', Component: MaintenanceError },
+    { path: '/401', Component: UnauthorisedError },
 
-  // Fallback 404 route
-  { path: '*', Component: NotFoundError },
+    // Fallback 404 route
+    { path: '*', Component: NotFoundError },
 ])
 
 export default router
