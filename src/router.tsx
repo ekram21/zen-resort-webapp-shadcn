@@ -4,6 +4,7 @@ import NotFoundError from './pages/errors/not-found-error'
 import MaintenanceError from './pages/errors/maintenance-error'
 import UnauthorisedError from './pages/errors/unauthorised-error.tsx'
 
+
 const router = createBrowserRouter([
   // Auth routes
   {
@@ -25,35 +26,18 @@ const router = createBrowserRouter([
     }),
   },
   {
-    path: '/sign-in-2',
-    lazy: async () => ({
-      Component: (await import('./pages/auth/sign-in-2')).default,
-    }),
-  },
-  {
-    path: '/sign-up',
-    lazy: async () => ({
-      Component: (await import('./pages/auth/sign-up')).default,
-    }),
-  },
-  {
     path: '/forgot-password',
     lazy: async () => ({
       Component: (await import('./pages/auth/forgot-password')).default,
     }),
   },
-  {
-    path: '/otp',
-    lazy: async () => ({
-      Component: (await import('./pages/auth/otp')).default,
-    }),
-  },
+
 
   // Main routes
   {
     path: '/app',
     lazy: async () => {
-      const AppShell = await import('./components/app-shell')
+      const AppShell = await import('./components/app-shell') //this component has auth protection for restricted routes
       return { Component: AppShell.default }
     },
     errorElement: <GeneralError />,
