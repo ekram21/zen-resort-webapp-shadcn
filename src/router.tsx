@@ -7,6 +7,12 @@ import UnauthorisedError from './pages/errors/unauthorised-error.tsx'
 const router = createBrowserRouter([
   // Auth routes
   {
+    path: '/',
+    lazy: async () => ({
+      Component: (await import('./pages/landing-page')).default,
+    }),
+  },
+  {
     path: '/sign-in',
     lazy: async () => ({
       Component: (await import('./pages/auth/sign-in')).default,
@@ -39,7 +45,7 @@ const router = createBrowserRouter([
 
   // Main routes
   {
-    path: '/',
+    path: '/app',
     lazy: async () => {
       const AppShell = await import('./components/app-shell')
       return { Component: AppShell.default }
