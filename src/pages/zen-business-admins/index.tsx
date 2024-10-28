@@ -1,20 +1,8 @@
 import { Layout } from '@/components/custom/layout'
 import ThemeSwitch from '@/components/theme-switch'
-import { TopNav } from '@/components/top-nav'
 import useAuth from '@/hooks/useAuth'
+import HeaderUnrestrictedPages from '@/components/header-unrestricted-pages'
 
-const topNav = [
-    {
-      title: 'Home',
-      href: '/',
-      isActive: true,
-    },
-    {
-      title: 'Sign-In',
-      href: '/sign-in',
-      isActive: false,
-    },
-  ]
 
 export default function ZenBusinessAdmins() {
 
@@ -24,7 +12,7 @@ export default function ZenBusinessAdmins() {
         <Layout>
         {/* ===== Top Heading ===== */}
         <Layout.Header>
-                <TopNav links={topNav} />
+                <HeaderUnrestrictedPages activeRoute='/zen-business-admins' />
                 <div className='ml-auto flex items-center space-x-4'>
                     <ThemeSwitch />
                 </div>
