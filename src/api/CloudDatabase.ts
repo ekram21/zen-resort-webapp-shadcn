@@ -1,7 +1,7 @@
 
 
 import {database} from '../firebase';
-import { ref, child, get, update , push} from "firebase/database";
+import { ref, child, get, update , push, onValue, DataSnapshot} from "firebase/database";
 import { toast } from '@/components/ui/use-toast'
 
 
@@ -118,6 +118,26 @@ class CloudDatabase {
     getPushKey(address: string){
         return push(child(ref(database), address)).key;
     } 
+
+    async listen(address: string, callback: (snapshot: DataSnapshot) => void){
+
+        if (address === undefined){
+            toast({title: 'The address for listen object is undefined'})
+            return Promise.reject('The address for listen object is undefined');
+        }
+        if (String(address).includes('/undefined')){
+            toast({title: 'The address for listen object is undefined'})
+            return Promise.reject('The address for listen object is undefined');
+        }
+
+        if (address === 'Hotel-Admins' || address === '/Hotel-Admins' || address === 'Hotel-Admins/' || address === '/Hotel-Admins/'){
+            toast({title: 'Cannot listen from root Hotel-Admins address'})
+            return Promise.reject('Cannot listen from root Hotel-Admins address');
+        }
+
+        const dbRef             = ref(database);
+        onValue(child(dbRef, address), callback);
+    }
 
 } 
 
