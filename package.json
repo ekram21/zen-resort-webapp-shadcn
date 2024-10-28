@@ -1,7 +1,7 @@
 {
   "name": "zen-resort-webapp",
   "private": true,
-  "version": "0.2",
+  "version": "0.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
-    "deploy:live": "tsc && vite build && firebase deploy --only hosting"
+    "version:patch": "npm version patch -m 'Bump version to %s'",
+    "deploy:live": "npm run version:patch && tsc && vite build && firebase deploy --only hosting"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
