@@ -1,12 +1,13 @@
 import { Layout } from '@/components/custom/layout'
 import ThemeSwitch from '@/components/theme-switch'
-import useAuth from '@/hooks/useAuth'
 import HeaderUnrestrictedPages from '@/components/header-unrestricted-pages'
-
+import { useState } from 'react';
+import { Card } from '@/components/ui/card'
+import { OtpForm } from './components/otp-form';
 
 export default function ZenBusinessAdmins() {
 
-    const isLoggedIn = useAuth();
+    const [isPinVerified, setIsPinVerified]         = useState(false);
 
     return (
         <Layout>
@@ -19,18 +20,36 @@ export default function ZenBusinessAdmins() {
             </Layout.Header>
 
         <Layout.Body>
-            <div className='mb-2 flex items-center justify-between space-y-2'>
-                <div>
-                    {isLoggedIn && <h1 className='text-2xl font-bold tracking-tight'>Welcome, {isLoggedIn.email}</h1>}
-                    <h2 className='text-2xl font-bold tracking-tight'>Zen Business Admin</h2>
-                    <p className='text-muted-foreground'>
-                    Warning! This is a restricted area and meant to be operated by authorized personnel from Zen only.
-                    </p>
-                </div>
-            </div>
-            <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
 
-            </div>
+            {isPinVerified === false ? 
+                <>
+                
+                    <div className='flex items-center justify-center' style={{ height: '80vh' }}>
+                        <div>
+                            <Card className='p-6'>
+                                <div className='mb-2 flex flex-col space-y-2 text-left'>
+                                    <h1 className='text-md font-semibold tracking-tight'>
+                                        Zen Business Admin
+                                    </h1>
+                                    <p className='text-sm text-muted-foreground'>
+                                        Please enter the special code to access this area.
+                                    </p>
+                                </div>
+                                <OtpForm verify_pin_callback={setIsPinVerified}/>
+                            </Card>
+                        </div>
+                    </div>
+                
+                </> 
+                : 
+                <>
+                
+                
+                
+                </>
+            }
+
+
         </Layout.Body>
         </Layout>
     )
