@@ -4,6 +4,7 @@ import ThemeSwitch from '@/components/theme-switch'
 
 import HeaderUnrestrictedPages from '@/components/header-unrestricted-pages'
 import zenLogo from "@/assets/images/landing-page/landingPageHero.png"
+import ProductFeatures from '@/components/animata/hero/product-features'
 
 
 
@@ -24,6 +25,8 @@ export default function LandingPage() {
         {/* className='space-y-4' */}
         <Layout.Body className='space-y-4'>
 
+            
+
             <div className='flex items-center justify-evenly space-x-4 p-10 pt-10'>
 
                 <div className='flex flex-col items-start space-y-2'>
@@ -36,6 +39,8 @@ export default function LandingPage() {
                 <img src={zenLogo} alt='zen-logo' className='w-1/2' />
 
             </div>
+
+            <ProductFeatures />
 
             <footer className="py-6 md:px-8 md:py-0">
                 <div className="container flex flex-col items-center justify-center gap-4 md:h-24 md:flex-row">
