@@ -5,6 +5,7 @@ import ThemeSwitch from '@/components/theme-switch'
 import HeaderUnrestrictedPages from '@/components/header-unrestricted-pages'
 import zenLogo from "@/assets/images/landing-page/landingPageHero.png"
 import ProductFeatures from '@/components/animata/hero/product-features'
+import FUIHeroSectionWithLogoClouds from '@/components/farm-ui/farmui/FUIHeroLogoCompany'
 
 
 
@@ -15,6 +16,8 @@ export default function LandingPage() {
     return (
         <Layout>
         {/* ===== Top Heading ===== */}
+
+        <FUIHeroSectionWithLogoClouds />
         <Layout.Header>
             <HeaderUnrestrictedPages activeRoute='/' />
             <div className='ml-auto flex items-center space-x-4'>
