@@ -1,6 +1,5 @@
 
-import React from "react";
-import { ChevronRight } from "lucide-react";
+
 import HeaderUnrestrictedPages from "@/components/header-unrestricted-pages";
 import ThemeSwitch from "@/components/theme-switch";
 import zenPhoneMockup from "@/assets/images/landing-page/landingPageHero.png"

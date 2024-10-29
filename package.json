@@ -11,7 +11,7 @@
     "format:check": "prettier --check .",
     "format": "prettier --write .",
     "version:patch": "npm version patch -m 'Bump version to %s'",
-    "deploy:live": "npm run version:patch && tsc && vite build && firebase deploy --only hosting"
+    "deploy:live": "git push && git commit && npm run version:patch && tsc && vite build && firebase deploy --only hosting"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
