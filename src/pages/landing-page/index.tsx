@@ -1,9 +1,5 @@
 
 import { Layout } from '@/components/custom/layout'
-import ThemeSwitch from '@/components/theme-switch'
-
-import HeaderUnrestrictedPages from '@/components/header-unrestricted-pages'
-import zenPhoneMockup from "@/assets/images/landing-page/landingPageHero.png"
 import ProductFeatures from '@/components/animata/hero/product-features'
 import FUIHeroSectionWithLogoClouds from '@/components/farm-ui/farmui/FUIHeroLogoCompany'
 
