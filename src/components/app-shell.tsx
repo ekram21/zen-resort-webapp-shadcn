@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, Navigate } from 'react-router-dom'
+import { Outlet, Navigate } from 'react-router-dom'
 import Sidebar from './sidebar'
 import useIsCollapsed from '@/hooks/use-is-collapsed'
 import SkipToMain from './skip-to-main'
