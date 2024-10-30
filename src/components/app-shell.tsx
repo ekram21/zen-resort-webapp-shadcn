@@ -4,25 +4,42 @@ import useIsCollapsed from '@/hooks/use-is-collapsed'
 import SkipToMain from './skip-to-main'
 import { auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function AppShell() {
 
     const [isCollapsed, setIsCollapsed]         = useIsCollapsed();
     const [redirectToLogin, setRedirectToLogin] = useState(false);
 
+    const isFirstLoad                           = useRef(true);   
+    const [loggedInAuth, setLoggedInAuth]       = useState<string | undefined>(undefined);
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
             if (firebaseUser?.uid) {
-                console.log('Logged-In User Detected: ', firebaseUser);
+                setLoggedInAuth(firebaseUser?.uid);
             }
             else{
-                console.log('No Logged-User Detected, so redirecting to login page');
+                console.log('No Logged-In-User Detected, so redirecting to login page');
                 setRedirectToLogin(true);
             }
         });
         return () => unsubscribe();
     }, []);
+
+
+    useEffect(() => {
+        if (loggedInAuth && isFirstLoad.current === true) {
+            console.log('Set up initial Store & Bindings for: ', loggedInAuth);
+            isFirstLoad.current = false;
+
+
+
+
+
+
+        }
+    }, [loggedInAuth]);
 
     if (redirectToLogin) {
         return <Navigate to='/sign-in' replace/>;
