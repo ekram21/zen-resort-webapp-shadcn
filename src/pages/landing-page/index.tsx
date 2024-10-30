@@ -1,6 +1,6 @@
 
 import { Layout } from '@/components/custom/layout'
-import ProductFeatures from '@/components/animata/hero/product-features'
+// import ProductFeatures from '@/components/animata/hero/product-features'
 import FUIHeroSectionWithLogoClouds from '@/components/farm-ui/farmui/FUIHeroLogoCompany'
 
 
@@ -19,7 +19,7 @@ export default function LandingPage() {
         <Layout.Body className='space-y-4'>
 
             
-            <ProductFeatures />
+            {/* <ProductFeatures /> */}
 
             <footer className="py-6 md:px-8 md:py-0">
                 <div className="container flex flex-col items-center justify-center gap-4 md:h-24 md:flex-row">

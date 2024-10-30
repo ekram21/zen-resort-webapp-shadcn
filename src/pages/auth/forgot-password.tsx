@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 export default function ForgotPassword() {
   return (
     <>
-      <div className='container grid h-svh flex-col items-center justify-center bg-primary-foreground lg:max-w-none lg:px-0'>
+    <div className='container grid h-svh flex-col items-center justify-center bg-primary-foreground dark:bg-primary-foreground-dark lg:max-w-none lg:px-0'>
         <div className='mx-auto flex w-full flex-col justify-center space-y-2 sm:w-[480px] lg:p-8'>
           <div className='mb-4 flex items-center justify-center'>
             <svg
@@ -34,12 +34,12 @@ export default function ForgotPassword() {
             </div>
             <ForgotForm />
             <p className='mt-4 px-8 text-center text-sm text-muted-foreground'>
-              Don't have an account?{' '}
+              Remembered Password?{' '}
               <Link
-                to='/sign-up'
+                to='/sign-in'
                 className='underline underline-offset-4 hover:text-primary'
               >
-                Sign up
+                Sign In
               </Link>
               .
             </p>

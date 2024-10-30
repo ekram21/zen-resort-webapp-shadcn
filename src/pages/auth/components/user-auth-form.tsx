@@ -1,4 +1,4 @@
-import { HTMLAttributes, useState } from 'react'
+import { HTMLAttributes, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { z } from 'zod'
@@ -15,43 +15,66 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/custom/button'
 import { PasswordInput } from '@/components/custom/password-input'
 import { cn } from '@/lib/utils'
+import { signInWithEmailAndPassword } from "firebase/auth";
+import {auth} from "../../../firebase"
+import { toast } from '@/components/ui/use-toast';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '@/hooks/useAuth';
 
 interface UserAuthFormProps extends HTMLAttributes<HTMLDivElement> {}
 
 const formSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: 'Please enter your email' })
-    .email({ message: 'Invalid email address' }),
-  password: z
-    .string()
-    .min(1, {
-      message: 'Please enter your password',
-    })
-    .min(7, {
-      message: 'Password must be at least 7 characters long',
-    }),
+    email: z
+        .string()
+        .min(1, { message: 'Please enter your email' })
+        .email({ message: 'Invalid email address' }),
+    password: z
+        .string()
+        .min(1, {
+        message: 'Please enter your password',
+        })
+        .min(7, {
+        message: 'Password must be at least 7 characters long',
+        }),
 })
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-  const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading]             = useState(false);
+    const navigate                              = useNavigate();
+    const authUser                              = useAuth();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  })
+    useEffect(()=>{
+        if(authUser?.uid){
+            navigate('/app');
+        }
+    }, [authUser, navigate]);
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    setIsLoading(true)
-    console.log(data)
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+        email: '',
+        password: '',
+        },
+    })
 
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
-  }
+    function onSubmit(data: z.infer<typeof formSchema>) {
+        setIsLoading(true)
+        console.log(data)
+
+        signInWithEmailAndPassword(auth, data.email, data.password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user);
+            })
+            .catch((error) => {
+                console.error(error);
+                toast({title: error.message})
+            })
+            .finally(() => {
+                setIsLoading(false);
+                navigate('/app');
+            })
+    }
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>

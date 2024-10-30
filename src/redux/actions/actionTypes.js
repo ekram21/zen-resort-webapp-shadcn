@@ -10,5 +10,5 @@ export const SET_INTRO              = 'SET_INTRO';
 
 
 //DATABASE
-export const SET_SELF_INFO                  = 'SET_SELF_INFO';
-export const SET_NOTIFICATIONS              = 'SET_NOTIFICATIONS';
+export const SET_SELF_INFO          = 'SET_SELF_INFO';
+export const SET_NOTIFICATIONS      = 'SET_NOTIFICATIONS';
