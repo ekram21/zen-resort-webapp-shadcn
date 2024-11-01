@@ -1,0 +1,1 @@
+import{j as r}from"./index-BhYYepx0.js";import{I as e}from"./input-h4dMutmH.js";function p(){return r.jsx("div",{children:r.jsx(e,{type:"search",placeholder:"Search...",className:"md:w-[100px] lg:w-[300px]"})})}export{p as S};
