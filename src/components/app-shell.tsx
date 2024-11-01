@@ -5,6 +5,10 @@ import SkipToMain from './skip-to-main'
 import { auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useRef, useState } from 'react';
+import { database } from '../firebase';
+import { ref, child, off, onValue, DataSnapshot, DatabaseReference } from "firebase/database";
+import { setSelfInfo } from '@/redux/actions/database';
+import { useDispatch } from 'react-redux';
 
 export default function AppShell() {
 
@@ -13,6 +17,7 @@ export default function AppShell() {
 
     const isFirstLoad                           = useRef(true);   
     const [loggedInAuth, setLoggedInAuth]       = useState<string | undefined>(undefined);
+    const dispatch                              = useDispatch();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
@@ -29,17 +34,26 @@ export default function AppShell() {
 
 
     useEffect(() => {
+        let selfInfoRef: DatabaseReference | undefined; // variable to hold reference for cleanup
+
         if (loggedInAuth && isFirstLoad.current === true) {
             console.log('Set up initial Store & Bindings for: ', loggedInAuth);
             isFirstLoad.current = false;
 
-
-
-
-
-
+            selfInfoRef = child(ref(database), `ZEN-Business-Accounts/${loggedInAuth}/SelfInfo`);
+            onValue(selfInfoRef, (snapshot: DataSnapshot) => {
+                const data = snapshot.val();
+                dispatch(setSelfInfo(data));
+            });
         }
-    }, [loggedInAuth]);
+
+        return ()=>{
+            //cleanup and unsubscribe from all listeners
+            if (selfInfoRef) {
+                off(selfInfoRef); // Unsubscribe from the specific listener
+            }
+        }
+    }, [loggedInAuth, dispatch]);
 
     if (redirectToLogin) {
         return <Navigate to='/sign-in' replace/>;

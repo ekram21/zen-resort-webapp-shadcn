@@ -14,10 +14,14 @@ import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 import { toast } from '@/components/ui/use-toast'
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 export function UserNav() {
 
     const navigate                              = useNavigate();
+    const selfInfoInLocalDb                     = useSelector((state: RootState) => state.database.SelfInfo);
+
 
     const logout = async () => {
         try {
@@ -36,16 +40,23 @@ export function UserNav() {
             <Button variant='ghost' className='relative h-8 w-8 rounded-full'>
             <Avatar className='h-8 w-8'>
                 <AvatarImage src='/avatars/01.png' alt='@shadcn' />
-                <AvatarFallback>SN</AvatarFallback>
+                <AvatarFallback>
+                    {selfInfoInLocalDb?.name ? 
+                        selfInfoInLocalDb.name.split(' ').length === 1 ? 
+                            selfInfoInLocalDb.name.substring(0, 2) : 
+                            selfInfoInLocalDb.name.split(' ').slice(0, 2).map(word => word[0]).join('') 
+                        : 
+                        '..'}
+                </AvatarFallback>
             </Avatar>
             </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className='w-56' align='end' forceMount>
             <DropdownMenuLabel className='font-normal'>
             <div className='flex flex-col space-y-1'>
-                <p className='text-sm font-medium leading-none'>satnaing</p>
+                <p className='text-sm font-medium leading-none'>{selfInfoInLocalDb?.name ? selfInfoInLocalDb?.name : '...'}</p>
                 <p className='text-xs leading-none text-muted-foreground'>
-                satnaingdev@gmail.com
+                {selfInfoInLocalDb?.email ? selfInfoInLocalDb?.email : '...'}
                 </p>
             </div>
             </DropdownMenuLabel>
@@ -69,7 +80,7 @@ export function UserNav() {
 
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-                <Button variant='secondary' onClick={logout}>
+                <Button variant='ghost' onClick={logout}>
                 Log out
             </Button>
             </DropdownMenuItem>
