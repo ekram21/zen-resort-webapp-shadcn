@@ -18,8 +18,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_SELF_INFO:
-        console.log("SET_SELF_INFO", action.data);
-
         return {
             ...state,
             SelfInfo: action.data,

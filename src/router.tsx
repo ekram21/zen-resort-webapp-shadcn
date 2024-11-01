@@ -75,7 +75,7 @@ const router = createBrowserRouter([
       {
         path: 'users',
         lazy: async () => ({
-          Component: (await import('@/pages/new-sidebar')).default,
+          Component: (await import('@/pages/apps')).default,
         }),
       },
       {

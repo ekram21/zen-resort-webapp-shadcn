@@ -7,37 +7,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary Meta Tags -->
-    <title>Zen - Automated Hotel Services</title>
-    <meta name="title" content="Zen - Automated Hotel Services" />
+    <title><%= process.env.VITE_PRODUCT_SUMMARY %></title>
+    <meta name="title" content="<%= process.env.VITE_PRODUCT_SUMMARY %>" />
     <meta
       name="description"
-      content="Zen - Automated Hotel Services"
+      content="<%= process.env.VITE_PRODUCT_SUMMARY %>"
     />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://zen-resort.web.app" />
-    <meta property="og:title" content="Zen - Automated Hotel Services" />
+    <meta property="og:url" content="<%= process.env.VITE_PROD_DOMAIN %>" />
+    <meta property="og:title" content="<%= process.env.VITE_PRODUCT_SUMMARY %>" />
     <meta
       property="og:description"
-      content="Zen - Automated Hotel Services"
+      content="<%= process.env.VITE_PRODUCT_SUMMARY %>"
     />
     <meta
       property="og:image"
-      content="https://shadcn-admin.netlify.app/images/shadcn-admin.png"
+      content="<%= process.env.VITE_PRODUCT_LANDSCAPE_IMAGE_FOR_SOCIALS %>"
     />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://zen-resort.web.app" />
-    <meta property="twitter:title" content="Zen - Automated Hotel Services" />
+    <meta property="twitter:url" content="<%= process.env.VITE_PROD_DOMAIN %>" />
+    <meta property="twitter:title" content="<%= process.env.VITE_PRODUCT_SUMMARY %>" />
     <meta
       property="twitter:description"
-      content="Zen - Automated Hotel Services"
+      content="<%= process.env.VITE_PRODUCT_SUMMARY %>"
     />
     <meta
       property="twitter:image"
-      content="https://shadcn-admin.netlify.app/images/shadcn-admin.png"
+      content="<%= process.env.VITE_PRODUCT_LANDSCAPE_IMAGE_FOR_SOCIALS %>"
     />
 
     <meta name="theme-color" content="#fff" />
