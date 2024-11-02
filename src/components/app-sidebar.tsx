@@ -5,7 +5,7 @@ import {
 
 import { sidelinks } from "@/data/sidelinks";
 
-import { SideBarContents } from "@/components/app-sidebar-contents"
+import { SideBarContents } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
