@@ -5,7 +5,7 @@ class CloudServer {
     private serverRootDomain: string;
     constructor(){
         // ====== IMPORTANT NEEDS THE SLASH AT THE END OF THIS URL ============ //
-        this.serverRootDomain = process.env.VITE_CLOUD_SERVER_URL ? process.env.VITE_CLOUD_SERVER_URL : '';  //FOR DEPLOY --
+        this.serverRootDomain = process.env.VITE_PROD_CLOUD_SERVER_URL ? process.env.VITE_PROD_CLOUD_SERVER_URL : '';  //FOR DEPLOY --
     } 
 
     async postRequestPromise(url: string, data: object = {}, useLocalHost: boolean) {
@@ -14,7 +14,7 @@ class CloudServer {
             url = url.substring(1);
         }
         
-        const fullAPI_URL = (useLocalHost === true ? 'http://localhost:8383/' : this.serverRootDomain) + url;
+        const fullAPI_URL = (useLocalHost === true ? process.env.VITE_LOCAL_BACKEND_MOCK_SERVER_URL : this.serverRootDomain) + url;
 
         const options = {
             method: 'POST',
