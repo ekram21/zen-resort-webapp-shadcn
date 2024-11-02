@@ -18,9 +18,6 @@ import { cn } from '@/lib/utils'
 import { Separator } from '@/components/ui/separator'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Layout } from '@/components/custom/layout'
-import { Search } from '@/components/search'
-import ThemeSwitch from '@/components/theme-switch'
-import { UserNav } from '@/components/user-nav'
 import { Button } from '@/components/custom/button'
 
 // Fake Data
@@ -60,14 +57,7 @@ export default function Rooms() {
 
   return (
     <Layout fixed>
-      {/* ===== Top Heading ===== */}
-      <Layout.Header>
-        <Search />
-        <div className='ml-auto flex items-center space-x-4'>
-          <ThemeSwitch />
-          <UserNav />
-        </div>
-      </Layout.Header>
+
 
       <Layout.Body className='sm:overflow-hidden'>
         <section className='flex h-full gap-6'>

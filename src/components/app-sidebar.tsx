@@ -5,7 +5,7 @@ import {
 
 import { sidelinks } from "@/data/sidelinks";
 
-import { NavMain } from "@/components/nav-main"
+import { SideBarContents } from "@/components/app-sidebar-contents"
 import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
@@ -39,7 +39,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain links={sidelinks} groupLinksLabel={true}/>
+                <SideBarContents links={sidelinks} groupLinksLabel={true}/>
             </SidebarContent>
 
             <SidebarFooter>
