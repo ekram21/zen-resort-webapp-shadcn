@@ -7,7 +7,7 @@ import { ref, child, off, onValue, DataSnapshot, DatabaseReference } from "fireb
 import { setSelfInfo } from '@/redux/actions/database';
 import { useDispatch } from 'react-redux';
 
-import { Search } from '@/components/search'
+// import { Search } from '@/components/search'
 import ThemeSwitch from '@/components/theme-switch'
 import { AppSidebar } from "@/components/app-sidebar"
 
@@ -72,7 +72,7 @@ export default function AppShell() {
                         <div className="flex items-center justify-between gap-2 px-4 w-full">
                             <div className="flex items-center gap-2">
                                 <SidebarTrigger className="-ml-1" />
-                                <Search />
+                                {/* <Search /> */}
                             </div>
                             <div className='ml-auto flex items-center space-x-4'>
                                 <ThemeSwitch />

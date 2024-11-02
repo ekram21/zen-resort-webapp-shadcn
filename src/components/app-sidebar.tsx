@@ -1,21 +1,12 @@
 import * as React from "react"
 import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
+  Hotel
 } from "lucide-react"
 
+import { sidelinks } from "@/data/sidelinks";
+
 import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
 import {
   Sidebar,
   SidebarContent,
@@ -23,150 +14,42 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { SideBarTopLogo } from "./SideBarTopLogo";
 
-// This is sample data.
-const data = {
-    user: {
-        name:           "loading..",
-        email:          "loading..",
-        avatar:         "/avatars/shadcn.jpg",
-    },
-    teams: [
-        {
-            name: "Acme Inc",
-            logo: GalleryVerticalEnd,
-            plan: "Enterprise",
-        },
-        {
-            name: "Acme Corp.",
-            logo: AudioWaveform,
-            plan: "Startup",
-        },
-        {
-        name: "Evil Corp.",
-        logo: Command,
-        plan: "Free",
-        },
-    ],
-    navMain: [
-        {
-        title: "Playground",
-        url: "#",
-        icon: SquareTerminal,
-        isActive: true,
-        items: [
-            {
-            title: "History",
-            url: "#",
-            },
-            {
-            title: "Starred",
-            url: "#",
-            },
-            {
-            title: "Settings",
-            url: "#",
-            },
-        ],
-        },
-        {
-        title: "Models",
-        url: "#",
-        icon: Bot,
-        items: [
-            {
-            title: "Genesis",
-            url: "#",
-            },
-            {
-            title: "Explorer",
-            url: "#",
-            },
-            {
-            title: "Quantum",
-            url: "#",
-            },
-        ],
-        },
-        {
-        title: "Documentation",
-        url: "#",
-        icon: BookOpen,
-        items: [
-            {
-            title: "Introduction",
-            url: "#",
-            },
-            {
-            title: "Get Started",
-            url: "#",
-            },
-            {
-            title: "Tutorials",
-            url: "#",
-            },
-            {
-            title: "Changelog",
-            url: "#",
-            },
-        ],
-        },
-        {
-        title: "Settings",
-        url: "#",
-        icon: Settings2,
-        items: [
-            {
-            title: "General",
-            url: "#",
-            },
-            {
-            title: "Team",
-            url: "#",
-            },
-            {
-            title: "Billing",
-            url: "#",
-            },
-            {
-            title: "Limits",
-            url: "#",
-            },
-        ],
-        },
-    ],
-    projects: [
-        {
-        name: "Design Engineering",
-        url: "#",
-        icon: Frame,
-        },
-        {
-        name: "Sales & Marketing",
-        url: "#",
-        icon: PieChart,
-        },
-        {
-        name: "Travel",
-        url: "#",
-        icon: Map,
-        },
-    ],
+
+const CompanyData = {
+    name: process.env.VITE_PRODUCT_NAME ? process.env.VITE_PRODUCT_NAME : '...',
+    logo: Hotel,
+    plan: "Enterprise",
 }
 
+
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
+    const selfInfoInLocalDb                     = useSelector((state: RootState) => state.database.SelfInfo);
+
     return (
         <Sidebar collapsible="icon" {...props}>
+
             <SidebarHeader>
-                <TeamSwitcher teams={data.teams} />
+                <SideBarTopLogo companyData={CompanyData} />
             </SidebarHeader>
+
             <SidebarContent>
-                <NavMain items={data.navMain} />
-                <NavProjects projects={data.projects} />
+                <NavMain links={sidelinks} groupLinksLabel={true}/>
             </SidebarContent>
+
             <SidebarFooter>
-                <NavUser user={data.user} />
+                <NavUser user={{
+                    name: selfInfoInLocalDb?.name ? selfInfoInLocalDb?.name : '...',
+                    email: selfInfoInLocalDb?.email ? selfInfoInLocalDb?.email : '...',
+                    avatar: selfInfoInLocalDb?.avatar ? selfInfoInLocalDb?.avatar : '/avatars/shadcn.jpg',
+                }} />
             </SidebarFooter>
+
             <SidebarRail />
         </Sidebar>
     )

@@ -1,58 +1,54 @@
+
+
 import {
-  IconLayoutDashboard,
-  IconSettings,
-  IconBowl,
-  IconDoor,
-  IconHotelService,
-  IconUsers
-} from '@tabler/icons-react'
+    LayoutDashboard,
+    Settings2, BedDouble, Soup, HandPlatter, UserRound, type LucideIcon
+  } from "lucide-react"
 
 export interface NavLink {
-  title: string
-  label?: string
-  href: string
-  icon: JSX.Element
+title: string;
+url: string;
+icon?: LucideIcon;
+isActive?: boolean;
+items?: SideLink[]; // Define items as an array of SideLink objects
 }
-
+  
 export interface SideLink extends NavLink {
-  sub?: NavLink[]
+items?: {
+    title: string;
+    url: string;
+}[];
 }
 
 export const sidelinks: SideLink[] = [
   {
     title: 'Dashboard',
-    label: '',
-    href: '/app',
-    icon: <IconLayoutDashboard size={18} />,
+    url: '/app',
+    icon: LayoutDashboard,
   },
   {
     title: 'Rooms',
-    label: '',
-    href: '/app/rooms',
-    icon: <IconDoor size={18} />,
+    url: '/app/rooms',
+    icon: BedDouble,
   },
   {
     title: 'In-Room Dining',
-    label: '',
-    href: '/app/dining',
-    icon: <IconBowl size={18} />,
+    url: '/app/dining',
+    icon: Soup,
   },
   {
     title: 'Services',
-    label: '',
-    href: '/app/services',
-    icon: <IconHotelService size={18} />,
+    url: '/app/services',
+    icon: HandPlatter,
   },
   {
     title: 'Guests',
-    label: '',
-    href: '/app/guests',
-    icon: <IconUsers size={18} />,
+    url: '/app/guests',
+    icon: UserRound,
   },
   {
     title: 'Settings',
-    label: '',
-    href: '/app/settings',
-    icon: <IconSettings size={18} />,
+    url: '/app/settings',
+    icon: Settings2,
   },
 ]

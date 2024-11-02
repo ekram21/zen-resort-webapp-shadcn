@@ -5,7 +5,7 @@ import {
   Trash2,
   type LucideIcon,
 } from "lucide-react"
-
+import { SideLink } from "@/data/sidelinks"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,11 +26,7 @@ import {
 export function NavProjects({
   projects,
 }: {
-  projects: {
-    name: string
-    url: string
-    icon: LucideIcon
-  }[]
+  projects: SideLink[]
 }) {
   const { isMobile } = useSidebar()
 
@@ -38,12 +34,12 @@ export function NavProjects({
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarGroupLabel>Projects</SidebarGroupLabel>
       <SidebarMenu>
-        {projects.map((item) => (
-          <SidebarMenuItem key={item.name}>
+        {projects.map((item: SideLink) => (
+          <SidebarMenuItem key={item.title}>
             <SidebarMenuButton asChild>
               <a href={item.url}>
-                <item.icon />
-                <span>{item.name}</span>
+                {/* <item.icon /> */}
+                <span>{item.title}</span>
               </a>
             </SidebarMenuButton>
             <DropdownMenu>

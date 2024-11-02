@@ -1,14 +1,10 @@
 "use client"
 
 import {
-  BadgeCheck,
-  Bell,
   ChevronsUpDown,
-  CreditCard,
   LogOut,
-  Sparkles,
 } from "lucide-react"
-
+import { Button } from '@/components/custom/button'
 import {
   Avatar,
   AvatarFallback,
@@ -17,7 +13,6 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -29,6 +24,10 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useNavigate } from "react-router-dom"
+import { auth } from "../firebase";
+import { signOut } from "firebase/auth";
+import { toast } from '@/components/ui/use-toast'
 
 export function NavUser({
   user,
@@ -39,7 +38,20 @@ export function NavUser({
     avatar: string
   }
 }) {
-  const { isMobile } = useSidebar()
+  const { isMobile } = useSidebar();
+
+  const navigate                              = useNavigate();
+
+  const logout = async () => {
+      try {
+          await signOut(auth);
+          toast({title: 'You have been logged out successfully', description: 'You will be redirected to the sign-in page'})
+          navigate('/sign-in', {replace: true});
+        } 
+      catch (error) {
+          console.error("Error signing out:", error);
+      }
+  }
 
   return (
     <SidebarMenu>
@@ -52,7 +64,12 @@ export function NavUser({
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <AvatarFallback className="rounded-lg">{user?.name ? 
+                        user.name.split(' ').length === 1 ? 
+                        user.name.substring(0, 2) : 
+                        user.name.split(' ').slice(0, 2).map(word => word[0]).join('') 
+                        : 
+                        '..'}</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{user.name}</span>
@@ -79,7 +96,7 @@ export function NavUser({
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
+            {/* <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <Sparkles />
@@ -100,11 +117,13 @@ export function NavUser({
                 <Bell />
                 Notifications
               </DropdownMenuItem>
-            </DropdownMenuGroup>
+            </DropdownMenuGroup> */}
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <LogOut />
-              Log out
+                <Button variant='ghost' onClick={logout}>
+                    <LogOut />
+                    Log out
+                </Button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
