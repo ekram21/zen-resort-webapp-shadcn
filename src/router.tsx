@@ -102,40 +102,7 @@ const router = createBrowserRouter([
             lazy: async () => ({
               Component: (await import('./pages/settings/profile')).default,
             }),
-          },
-          {
-            path: 'account',
-            lazy: async () => ({
-              Component: (await import('./pages/settings/account')).default,
-            }),
-          },
-          {
-            path: 'appearance',
-            lazy: async () => ({
-              Component: (await import('./pages/settings/appearance')).default,
-            }),
-          },
-          {
-            path: 'notifications',
-            lazy: async () => ({
-              Component: (await import('./pages/settings/notifications'))
-                .default,
-            }),
-          },
-          {
-            path: 'display',
-            lazy: async () => ({
-              Component: (await import('./pages/settings/display')).default,
-            }),
-          },
-          {
-            path: 'error-example',
-            lazy: async () => ({
-              Component: (await import('./pages/settings/error-example'))
-                .default,
-            }),
-            errorElement: <GeneralError className='h-[50svh]' minimal />,
-          },
+          }
         ],
       },
     ],
