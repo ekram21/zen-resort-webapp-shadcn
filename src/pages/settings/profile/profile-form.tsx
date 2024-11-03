@@ -13,8 +13,13 @@ import {
 import { Input } from '@/components/ui/input'
 
 import { toast } from '@/components/ui/use-toast'
-
+import { sendPasswordResetEmail } from "firebase/auth";
+import {auth} from "../../../firebase";
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/redux/store'
+import { useEffect } from 'react'
+import { decodeString } from '@/lib/utils'
 
 const profileFormSchema = z.object({
   username: z
@@ -29,35 +34,32 @@ const profileFormSchema = z.object({
     .string({
       required_error: 'Please select an email to display.',
     })
-    .email(),
-  bio: z.string().max(160).min(4),
-  urls: z
-    .array(
-      z.object({
-        value: z.string().url({ message: 'Please enter a valid URL.' }),
-      })
-    )
-    .optional(),
+    .email()
 })
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>
 
-// This can come from your database or API.
-const defaultValues: Partial<ProfileFormValues> = {
-  bio: 'I own a computer.',
-  urls: [
-    { value: 'https://shadcn.com' },
-    { value: 'http://twitter.com/shadcn' },
-  ],
+const defaultValues: ProfileFormValues = {
+    username        : '',
+    email           : '',
 }
 
 export default function ProfileForm() {
+
+    const selfInfoInLocalDb                     = useSelector((state: RootState) => state.database.SelfInfo);
 
     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(profileFormSchema),
         defaultValues,
         mode: 'onChange',
-    })
+    });
+
+    useEffect(()=>{
+        if (selfInfoInLocalDb) {
+            form.setValue('username', decodeString(selfInfoInLocalDb.name));
+            form.setValue('email', decodeString(selfInfoInLocalDb.email));
+        }
+    }, [selfInfoInLocalDb, form]);
 
     function onSubmit(data: ProfileFormValues) {
         toast({
@@ -102,8 +104,18 @@ export default function ProfileForm() {
                 )}
                 />
 
-                <Button type='submit'>Update Account</Button>
+                <Button type='submit' className='w-full'>Update Account</Button>
             </form>
+            <Button onClick={()=>{
+                sendPasswordResetEmail(auth, decodeString(selfInfoInLocalDb.email))
+                .then(() => {
+                    toast({title: `Password reset email sent to ${decodeString(selfInfoInLocalDb.email)}. Please check your spam folder if you cannot find it.`})
+                })
+                .catch((error) => {
+                    const errorMessage = error.message;
+                    toast({title: errorMessage})
+                });
+            }} type='button' className='w-full mt-2 bg-red-600 hover:bg-orange-600'>Reset Password</Button>
         </Form>
     )
 }

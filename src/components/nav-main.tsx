@@ -43,7 +43,7 @@ export function SideBarContents({ links, groupLinksLabel }: NavMainProps) {
                                 return (
                                         <SidebarMenuItem key={item.title}>
                                                 <SidebarMenuButton asChild>
-                                                        <Link to={item.url} className={cn("sidebar-link flex items-center p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200", checkActiveNav(item.url) ? "bg-gray-200 dark:bg-gray-700": "")}>
+                                                        <Link to={item.url} className={cn("sidebar-link flex items-center p-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors duration-200", checkActiveNav(item.url) ? "bg-gray-200 dark:bg-gray-700": "")}>
                                                                 {item.icon && <item.icon />}
                                                                 <span>{item.title}</span>
                                                         </Link>
