@@ -1,0 +1,11 @@
+{
+    "admin-panel": {
+        "header": "Panneau d'administration",
+        "dashboard": "Tableau de bord",
+        "rooms": "Chambres",
+        "dining": "Repas en chambre",
+        "services": "Services",
+        "guests": "Invités",
+        "settings": "Paramètres"
+    }
+}
