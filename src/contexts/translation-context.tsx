@@ -1,8 +1,8 @@
 import { createContext, useEffect, useMemo, useState } from 'react'
-import en from '../../public/locale/en.json'
-import bd from '../../public/locale/bd.json'
-import es from '../../public/locale/es.json'
-import fr from '../../public/locale/fr.json'
+import en from '../locale/en.json'
+import bd from '../locale/bd.json'
+import es from '../locale/es.json'
+import fr from '../locale/fr.json'
 
 export const TranslationContext = createContext<any>(undefined)
 

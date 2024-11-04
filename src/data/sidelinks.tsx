@@ -10,10 +10,7 @@ export interface NavLink {
 }
 
 export interface SideLink extends NavLink {
-    items?: {
-        title: string
-        url: string
-    }[]
+    items?: SideLink[]
 }
 
 export const sidelinks: SideLink[] = [

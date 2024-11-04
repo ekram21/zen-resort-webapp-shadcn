@@ -1,7 +1,7 @@
 {
     "admin-panel": {
         "header": "Admin Panel",
-        "dasboard": "Dashboard",
+        "dashboard": "Dashboard",
         "rooms": "Rooms",
         "dining": "In-Room Dining",
         "services": "Services",
