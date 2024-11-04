@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/sidebar'
 import { Link } from 'react-router-dom'
 import useCheckActiveNav from '@/hooks/use-check-active-nav'
-import { useTranslation } from '../hooks/useTranslation'
+import { useTranslation } from '@/contexts'
 
 interface NavMainProps {
     links: SideLink[]

@@ -6,7 +6,7 @@ import {
     DropdownMenuItem,
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
-import { useTranslation } from '../hooks/useTranslation'
+import { useTranslation } from '@/contexts'
 import { IconCheck } from '@tabler/icons-react'
 import { cn } from '../lib/utils'
 import { SVGProps } from 'react';

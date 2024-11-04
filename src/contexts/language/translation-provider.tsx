@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import en from '../locale/en.json'
-import bd from '../locale/bd.json'
-import es from '../locale/es.json'
-import fr from '../locale/fr.json'
-import { TranslationContext } from './translationContext'
+import en from '../../locale/en.json'
+import bd from '../../locale/bd.json'
+import es from '../../locale/es.json'
+import fr from '../../locale/fr.json'
+import { TranslationContext } from './translation-context'
 
 //add a type for import of en
 type Translation = typeof en
