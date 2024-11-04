@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { TranslationContext } from '../contexts/translation-context'
+import { TranslationContext } from '../contexts/translationContext'
 
 // Create a custom hook to access the context value
 export function useTranslation() {

@@ -2,8 +2,6 @@ import {
     DropdownMenu,
     DropdownMenuTrigger,
     DropdownMenuContent,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuGroup,
     DropdownMenuItem,
 } from '@/components/ui/dropdown-menu'
@@ -11,14 +9,15 @@ import { Button } from '@/components/ui/button'
 import { useTranslation } from '../hooks/useTranslation'
 import { IconCheck } from '@tabler/icons-react'
 import { cn } from '../lib/utils'
+import { SVGProps } from 'react';
 
 export default function LanguageSelect() {
-    const { t, setLanguage, languages, language } = useTranslation()
-    const selectedLanguage = languages?.find((lang) => lang.value === language)
+    const { setLanguage, languages, language } = useTranslation()
+    const selectedLanguage = languages?.find((lang: { value: string; icon: string; label: string }) => lang.value === language)
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant='outline' className='flex items-center gap-2'>
+                <Button variant='outline' className='flex items-center gap-2' size={'sm'}>
                     <img
                         src={selectedLanguage.icon}
                         alt={`{selectedLanguage.label} Flag`}
@@ -34,7 +33,7 @@ export default function LanguageSelect() {
             <DropdownMenuContent align='end' className='w-[100px]'>
                 <DropdownMenuGroup>
                     {languages &&
-                        languages.map((language) => {
+                        languages.map((language: { value: string; icon: string; label: string }) => {
                             return (
                                 <DropdownMenuItem key={language.value} onClick={() => setLanguage(language.value)}>
                                     <div className='flex items-center gap-2'>
@@ -64,7 +63,9 @@ export default function LanguageSelect() {
     )
 }
 
-function ChevronDownIcon(props) {
+
+
+function ChevronDownIcon(props: SVGProps<SVGSVGElement>) {
     return (
         <svg
             {...props}

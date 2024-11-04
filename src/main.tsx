@@ -8,7 +8,7 @@ import router from '@/router'
 import '@/index.css'
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
-import { TranslationProvider } from './contexts/translation-context'
+import { TranslationProvider } from './contexts/translation-provider'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>

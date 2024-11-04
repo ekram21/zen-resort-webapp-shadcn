@@ -1,10 +1,14 @@
-import { createContext, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import en from '../locale/en.json'
 import bd from '../locale/bd.json'
 import es from '../locale/es.json'
 import fr from '../locale/fr.json'
+import { TranslationContext } from './translationContext'
 
-export const TranslationContext = createContext<any>(undefined)
+//add a type for import of en
+type Translation = typeof en
+
+
 
 type TranslationProviderProps = {
     children: React.ReactNode
@@ -12,7 +16,7 @@ type TranslationProviderProps = {
 
 const supportedLanguages = process.env.VITE_LANGUAGES?.split(',')
 
-const supportedTranslations = {
+const supportedTranslations: { [key: string]: Translation } = {
     en,
     bd,
     es,
@@ -22,28 +26,30 @@ const supportedTranslations = {
 export function TranslationProvider({
     children,
 }: TranslationProviderProps): JSX.Element {
+
     const [language, setLanguage] = useState<string>(
         supportedLanguages?.[0] || 'en'
     )
-    const [translations, setTranslations] = useState<any>()
+
+    const [translations, setTranslations] = useState<Translation | undefined>()
 
     useEffect(() => {
         setTranslations(supportedTranslations[language])
     }, [language])
 
-    const t = (key: string, translation: any = translations) => {
+    const t = useCallback((key: string, translation: Translation | undefined = translations) => {
+        if (!translation) return key;
         const index = key.indexOf('.')
-        console.log(key.slice(0, index))
-        console.log(translation)
-        console.log(translation[key.slice(0, index)])
+        const topKey = key.slice(0, index)
+        const nestedTranslation = translation[topKey as keyof Translation]
         if (index === -1) {
-            return translation[key] || key
+            return translation[key as keyof Translation] || key
         }
-        if (translation[key.slice(0, index)] === undefined) {
+        if (nestedTranslation === undefined) {
             return key
         }
-        return t(key.slice(index + 1), translation[key.slice(0, index)])
-    }
+        return t(key.slice(index + 1), nestedTranslation as unknown as Translation)
+    }, [translations])
 
     const languages = useMemo(() => {
         if (supportedLanguages) {
@@ -76,7 +82,7 @@ export function TranslationProvider({
             setTranslations,
             languages,
         }),
-        [language, translations]
+        [language, translations, languages, t]
     )
 
     return (

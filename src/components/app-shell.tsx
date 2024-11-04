@@ -86,8 +86,8 @@ export default function AppShell() {
                     <SidebarTrigger className="-ml-1" />
                 </div>
                 <div className='ml-auto flex items-center space-x-4'>
-                    <LanguageSelect />
                     <ThemeSwitch />
+                    <LanguageSelect />
                 </div>
             </div>
         </header>
